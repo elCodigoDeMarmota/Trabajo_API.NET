@@ -22,7 +22,7 @@ namespace Trabajo_API_.NET
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            //activando swagger
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();

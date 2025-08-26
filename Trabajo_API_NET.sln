@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36127.28
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trabajo_API.NET", "Trabajo_API.NET.csproj", "{411D591B-C1D4-434B-AADC-C5EAFBF099D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trabajo_API_NET", "Trabajo_API_NET.csproj", "{411D591B-C1D4-434B-AADC-C5EAFBF099D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

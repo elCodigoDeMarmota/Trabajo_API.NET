@@ -1,5 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using Trabajo_API_NET.Data;
+using Trabajo_API_NET.Servicios;
 
-namespace Trabajo_API_.NET
+namespace Trabajo_API_NET
 {
     public class Program
     {
@@ -13,6 +16,10 @@ namespace Trabajo_API_.NET
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddSingleton<IGeneradorID, GeneradorID>();
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
             var app = builder.Build();
 

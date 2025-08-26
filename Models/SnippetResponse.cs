@@ -1,4 +1,4 @@
-﻿namespace Trabajo_API.NET.Models
+﻿namespace Trabajo_API_NET.Models
 {
     public class SnippetResponse
     {

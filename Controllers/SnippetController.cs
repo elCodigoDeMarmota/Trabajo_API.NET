@@ -1,41 +1,68 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Trabajo_API.NET.Models;
-
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Trabajo_API_NET.Data;      
+using Trabajo_API_NET.Models;    
+using Trabajo_API_NET.Servicios;  
 
 namespace Trabajo_API_NET.Controllers
 {
     [ApiController]
-    [Route("api/snippets")]   // 👈 ruta fija, REST, sin tokens raros
+    [Route("api/snippets")]
     public class SnippetController : ControllerBase
     {
-        // POST /api/snippets
+        private readonly AppDbContext _db;        
+        private readonly IGeneradorID _generadorID; 
+
+        // Inyección de dependencias: DbContext + GeneradorID
+        public SnippetController(AppDbContext db, IGeneradorID generadorID)
+        {
+            _db = db;
+            _generadorID = generadorID;
+        }
+
+ 
         [HttpPost]
-        public IActionResult Create([FromBody] SnippetCreateRequest request)
+        public async Task<IActionResult> Create([FromBody] SnippetCreateRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.Code))
-                return BadRequest("The codigo es requerido.");
+                return BadRequest("The 'code' field is required.");
 
-            var id = "demo123"; // mock temporal
+            // Generar ID corto y evitar colisiones (muy poco probable)
+            string id;
+            do { id = _generadorID.NuevoID(7); }
+            while (await _db.Snippets.AnyAsync(s => s.Id == id));
+
+            var entity = new Snippet
+            {
+                Id = id,
+                Code = request.Code,
+                Language = request.Language,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _db.Snippets.Add(entity);
+            await _db.SaveChangesAsync();
+
             return Created($"/api/snippets/{id}", new { id });
         }
 
-        // GET /api/snippets/{id}
-        [HttpGet("{id}")]
-        public IActionResult GetById(string id)
-        {
-            if (id != "demo123")
-                return NotFound();
 
-            var demo = new SnippetResponse
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            var entity = await _db.Snippets.FindAsync(id);
+            if (entity is null) return NotFound();
+
+            var response = new SnippetResponse
             {
-                Id = "demo123",
-                Code = "Console.WriteLine(\"Hello\");",
-                Language = "csharp",
-                CreatedAt = DateTime.UtcNow
+                Id = entity.Id,
+                Code = entity.Code,
+                Language = entity.Language,
+                CreatedAt = entity.CreatedAt
             };
-            return Ok(demo);
+            return Ok(response);
         }
     }
 }
+
 

@@ -5,7 +5,7 @@ namespace Trabajo_API_NET.Servicios
 {
     public interface IGeneradorID
     {
-        string NuevoID(int length = 7); // Longitud por defecto 7
+        string NuevoID(int length = 7); 
     }
 
     public class GeneradorID : IGeneradorID

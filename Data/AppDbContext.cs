@@ -7,6 +7,16 @@ namespace Trabajo_API_NET.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<Snippet> Snippets { get; set; }
+        public DbSet<Snippet> Snippets => Set<Snippet>();
+        public DbSet<BuscarCode> BuscarCodes => Set<BuscarCode>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<BuscarCode>()
+                .HasNoKey()
+                .ToView(null);
+        }
     }
 }

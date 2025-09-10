@@ -10,30 +10,58 @@ namespace Trabajo_API_NET
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddSingleton<IGeneradorID, GeneradorID>();
+
             builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddSingleton<IGeneradorID, GeneradorID>();
             builder.Services.AddScoped<BuscarSnippet>();
+
+            builder.Services.AddHttpClient("Highlighter", c =>
+            {
+                c.BaseAddress = new Uri("http://localhost:5032");
+                c.Timeout = TimeSpan.FromSeconds(10);
+            });
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowWebUI", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5173") 
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            //activando swagger
-            app.UseHttpsRedirection();
+
+            //app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseCors("AllowWebUI"); 
+
             app.UseAuthorization();
-            app.MapControllers();
+
+            app.MapControllers();  
+
             app.Run();
+
+            builder.Services.AddHttpClient("Highlighter", (sp, c) =>
+            {
+                var cfg = sp.GetRequiredService<IConfiguration>();
+                c.BaseAddress = new Uri(cfg["Highlighter:BaseUrl"]!);
+            });
         }
     }
 }

@@ -5,6 +5,10 @@ VisualStudioVersion = 17.14.36127.28
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trabajo_API_NET", "Trabajo_API_NET.csproj", "{411D591B-C1D4-434B-AADC-C5EAFBF099D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "..\WebUI\WebUI.csproj", "{88E63358-19A2-481E-A5C4-0756C745D579}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highlighter", "..\..\..\..\Downloads\Highlighter\Highlighter\Highlighter\Highlighter.csproj", "{D66FB72A-B0D4-AFA1-5F33-1D7772C3E94F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{411D591B-C1D4-434B-AADC-C5EAFBF099D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{411D591B-C1D4-434B-AADC-C5EAFBF099D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{411D591B-C1D4-434B-AADC-C5EAFBF099D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88E63358-19A2-481E-A5C4-0756C745D579}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88E63358-19A2-481E-A5C4-0756C745D579}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88E63358-19A2-481E-A5C4-0756C745D579}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88E63358-19A2-481E-A5C4-0756C745D579}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D66FB72A-B0D4-AFA1-5F33-1D7772C3E94F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D66FB72A-B0D4-AFA1-5F33-1D7772C3E94F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D66FB72A-B0D4-AFA1-5F33-1D7772C3E94F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D66FB72A-B0D4-AFA1-5F33-1D7772C3E94F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

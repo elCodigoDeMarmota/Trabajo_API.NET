@@ -9,9 +9,13 @@
 
   <ItemGroup>
     <Compile Remove="NewFolder\**" />
+    <Compile Remove="Views\Snippet\**" />
     <Content Remove="NewFolder\**" />
+    <Content Remove="Views\Snippet\**" />
     <EmbeddedResource Remove="NewFolder\**" />
+    <EmbeddedResource Remove="Views\Snippet\**" />
     <None Remove="NewFolder\**" />
+    <None Remove="Views\Snippet\**" />
   </ItemGroup>
 
   <ItemGroup>

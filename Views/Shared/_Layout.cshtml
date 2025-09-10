@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>@ViewData["Title"] - Snippet Highlighter</title>
+  <link rel="stylesheet" href="~/css/site.css" />
+  @RenderSection("Styles", required: false)
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a asp-controller="Snippet" asp-action="Crear" class="logo">🍏 Snippet Highlighter</a>
+    </div>
+  </header>
+
+  <main class="container">
+    @RenderBody()
+  </main>
+
+  <footer class="footer">
+    <div class="container">© @DateTime.Now.Year</div>
+  </footer>
+
+  @RenderSection("Scripts", required: false)
+</body>
+</html>

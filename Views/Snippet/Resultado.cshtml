@@ -1,0 +1,36 @@
+@model Trabajo_API_NET.Models.SnippetCreateRequest
+@{
+    ViewData["Title"] = "Resultado";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>@ViewData["Title"]</title>
+  <link rel="stylesheet" href="~/css/snippet.css" />
+  <style>
+    .code-box{border:1px solid var(--border);border-radius:14px;padding:16px;overflow:auto;background:#0b0c10;color:#f5f7fb}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1 class="title">Resultado</h1>
+    @if (ViewBag.SnippetId != null)
+    { <p class="subtitle">ID guardado: <strong>@ViewBag.SnippetId</strong></p> }
+  </div>
+
+  <div class="card">
+    <div class="code-box">
+      @Html.Raw(ViewBag.HighlightedHtml)
+    </div>
+
+    <div class="row" style="margin-top:16px">
+      <div></div>
+      <a href="/Snippet/Crear" class="btn" style="text-decoration:none;display:inline-block;text-align:center">Crear otro</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
